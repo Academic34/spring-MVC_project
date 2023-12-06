@@ -12,11 +12,15 @@ public class CarsController {
 
     private final String MAX_COUNT_CAR = "5";
 
+    private final CarService carService;
+
     @Autowired
-    CarService carService;
+    public CarsController(CarService carService) {
+        this.carService = carService;
+    }
 
     @GetMapping("/cars")
-    String getCars(Model model, @RequestParam(value = "count", defaultValue = MAX_COUNT_CAR) String quantity) {
+    public String getCars(Model model, @RequestParam(value = "count", defaultValue = MAX_COUNT_CAR) String quantity) {
 
         model.addAttribute("listCars", carService.getCars(Integer.parseInt(quantity)));
 
